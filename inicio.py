@@ -2,6 +2,7 @@ import  tkinter as tk
 from tkinter import ttk
 import  matplotlib.pyplot as plt
 import numpy as np
+
 class Aplicacion:
     def __init__(self,master):
         self.master=master
@@ -31,9 +32,8 @@ class Aplicacion:
        self.master.wait_window(primerVenta.ventanaSecundaria)
 
     def segu(self):
-        pass;
-
-
+        segunVentana=VentanaSegundoGrado(self.master)
+        self.master.wait_window(segunVentana.ventanaSecundaria)
 
 class VentanaPrimerGrado:
     def __init__(self,master):
@@ -41,21 +41,22 @@ class VentanaPrimerGrado:
         self.ventanaSecundaria=tk.Toplevel()
         self.ventanaSecundaria.title("grafica lineal")
         self.ventanaSecundaria.geometry('350x250')
-
         self.inicializar2()
 
     def inicializar2(self):
-        welcome = tk.Label(self.ventanaSecundaria, text='ingrese los datos de la ecuacion y=x+c', font=("Helvetica", 12))
+        welcome = tk.Label(self.ventanaSecundaria, text='ingrese los datos de la ecuacion y=ax+c', font=("Helvetica", 12))
         welcome.place(x=0, y=10)
 
-        welcome=tk.Label(self.ventanaSecundaria,text="ingrese x",font=("Helvetica", 12))
+        welcome=tk.Label(self.ventanaSecundaria,text="ingrese a",font=("Helvetica", 12))
         welcome.place(x=0,y=50)
         self.tex_x=tk.Entry(self.ventanaSecundaria)
+        self.tex_x.insert(0, "0")
         self.tex_x.place(x=0,y=75)
 
         welcome = tk.Label(self.ventanaSecundaria, text="ingrese c", font=("Helvetica", 12))
         welcome.place(x=0, y=125)
         self.tex_c=tk.Entry(self.ventanaSecundaria)
+        self.tex_c.insert(0, "0")
         self.tex_c.place(x=0,y=150)
 
         enviar = tk.Button(self.ventanaSecundaria, text="graficar", bg="blue", fg="white")
@@ -72,19 +73,57 @@ class VentanaPrimerGrado:
             Vy.append((x*i)+c)
         plt.plot(Vx,Vy)
         plt.show()
-        pass
 
+class VentanaSegundoGrado:
+    def __init__(self,master):
+        self.master = master
+        self.ventanaSecundaria=tk.Toplevel()
+        self.ventanaSecundaria.title("grafica lineal")
+        self.ventanaSecundaria.geometry('350x250')
+        self.iniciar()
 
+    def iniciar(self):
+        texto=tk.Label(self.ventanaSecundaria,text="ingrese aX^2+bX+c",font=("Helvetica", 12))
+        texto.place(x=0,y=10)
 
+        texto = tk.Label(self.ventanaSecundaria, text="ingrese a", font=("Helvetica", 12))
+        texto.place(x=0, y=50)
+        self.tex_a = tk.Entry(self.ventanaSecundaria)
+        self.tex_a.insert(0,"0")
+        self.tex_a.place(x=0, y=75)
 
+        texto = tk.Label(self.ventanaSecundaria, text="ingrese b", font=("Helvetica", 12))
+        texto.place(x=0, y=100)
+        self.tex_b = tk.Entry(self.ventanaSecundaria)
+        self.tex_b.insert(0, "0")
+        self.tex_b.place(x=0, y=130)
 
+        texto = tk.Label(self.ventanaSecundaria, text="ingrese c", font=("Helvetica", 12))
+        texto.place(x=0, y=150)
+        self.tex_c = tk.Entry(self.ventanaSecundaria)
+        self.tex_c.insert(0, "0")
+        self.tex_c.place(x=0, y=170)
 
+        enviar = tk.Button(self.ventanaSecundaria, text="graficar", bg="blue", fg="white")
+        enviar.place(x=0, y=200)
+        enviar["command"] = self.graficar
+
+    def graficar(self):
+        a=int(self.tex_a.get())
+        b=int(self.tex_b.get())
+        c=int(self.tex_c.get())
+        y=[]
+        x=[]
+        for i in range(-100,101):
+            y.append((a*(pow(i,2)))+(i*b)+c)
+            x.append(i)
+        plt.plot(x,y)
+        plt.show()
 
 def main():
     root=tk.Tk()
     ventana=Aplicacion(root)
     root.mainloop()
-
 
 #/////////////////////////
 main()
