@@ -25,7 +25,7 @@ class Aplicacion:
 
         boton3 = tk.Button(self.master, text="grafica libre", bg="blue", fg="white")
         boton3.place(x=0, y=150)
-        boton3["command"] = self.segu
+        boton3["command"] = self.libre
 
     def primer(self):
        primerVenta=VentanaPrimerGrado(self.master)
@@ -34,6 +34,9 @@ class Aplicacion:
     def segu(self):
         segunVentana=VentanaSegundoGrado(self.master)
         self.master.wait_window(segunVentana.ventanaSecundaria)
+
+    def libre(self):
+        pass
 
 class VentanaPrimerGrado:
     def __init__(self,master):
