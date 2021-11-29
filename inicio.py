@@ -13,15 +13,15 @@ def main():
 
         info1_a = Label(app2,text="Ingrese a:",font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
         info1_a.place(relx=0.1,y=50)
-        tex_1x = Entry(app2)
-        tex_1x.insert(0, "0")
-        tex_1x.place(relx=0.1,y=75)
+        tex_x1 = Entry(app2)
+        tex_x1.insert(0, "0")
+        tex_x1.place(relx=0.1,y=75)
 
         info1_c = Label(app2, text="Ingrese c:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
         info1_c.place(relx=0.1, y=125)
-        tex_1c = Entry(app2)
-        tex_1c.insert(0, "0")
-        tex_1c.place(relx=0.1,y=150)
+        tex_c1 = Entry(app2)
+        tex_c1.insert(0, "0")
+        tex_c1.place(relx=0.1,y=150)
 
         desc_enviar1 = Label(app3, text="Presione el botón para ver la gráfica", font=("BarQ", 15), bg="#9fc5a0", fg="black")
         desc_enviar1.place(relx=0.35, relwidth=0.8, height=50, anchor="n")
@@ -29,8 +29,8 @@ def main():
         enviar1.place(relx=-0.05, rely=0.1, relwidth=0.8, height=50)
 
         def graficar1():
-            x=int(tex1_x.get())
-            c=int(tex1_c.get())
+            x=int(tex_x1.get())
+            c=int(tex_c1.get())
             Vx=[]
             Vy=[]
             for i in range(-100,101):
