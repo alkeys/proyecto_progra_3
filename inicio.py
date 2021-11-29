@@ -1,5 +1,6 @@
 import  tkinter as tk
 from tkinter import ttk
+from tkinter.filedialog import askopenfilename
 import  matplotlib.pyplot as plt
 import numpy as np
 import csv
@@ -25,7 +26,7 @@ class Aplicacion:
         boton2.place(x=0,y=100)
         boton2["command"]=self.segu
 
-        boton3 = tk.Button(self.master, text="grafica libre", bg="blue", fg="white")
+        boton3 = tk.Button(self.master, text="graficar CSV", bg="blue", fg="white")
         boton3.place(x=0, y=150)
         boton3["command"] = self.libre
 
@@ -128,31 +129,100 @@ class VentanaSegundoGrado:
         plt.show()
 
 class VentanaLibre():
-    def __init__(self, master):
+    def __init__(self, master=None):
         self.master = master
         self.VentaLibre = tk.Toplevel()
         self.VentaLibre.title("graficadora Libre")
-        self.VentaLibre.geometry('350x350')
+        self.VentaLibre.geometry('600x400')
         self.iniciar()
 
     def iniciar(self):
+        self.file = askopenfilename()
         self.x = []
         self.y = []
-        with open('datos.csv', encoding='utf-8') as csvF:
+        with open(self.file, encoding='utf-8') as csvF:
             plots = csv.reader(csvF, delimiter=',')
             next(plots)
             for row in plots:
                 self.x.append(row[0])
                 self.y.append(int(row[1]))
+        dato= self.OctenerData()
+        mostar=tk.Label(self.VentaLibre, text=f"{dato}", bg="blue", fg="white")
+        mostar.place(x=10,y=0)
 
-        enviar = tk.Button(self.VentaLibre, text="graficar circular", bg="blue", fg="white")
-        enviar.place(x=0, y=250)
-        enviar["command"] = self.graficar
+        boton1 = tk.Button(self.VentaLibre, text="graficar circular", bg="blue", fg="white")
+        boton1.place(x=0, y=250)
+        boton1["command"] = self.graficarCircular
 
-    def graficar(self):
+        boton2 = tk.Button(self.VentaLibre, text="graficar de Barras", bg="blue", fg="white")
+        boton2.place(x=125, y=250)
+        boton2["command"] = self.graficarBarras
+
+        boton3 = tk.Button(self.VentaLibre, text="graficar de Barra Horizontal", bg="blue", fg="white")
+        boton3.place(x=275, y=250)
+        boton3["command"] = self.graficarBarrasHorizontal
+
+        boton4 = tk.Button(self.VentaLibre, text="graficar de Areas", bg="blue", fg="white")
+        boton4.place(x=475, y=250)
+        boton4["command"] = self.graficarAreas
+
+        boton5 = tk.Button(self.VentaLibre, text="graficar de Histograma", bg="blue", fg="white")
+        boton5.place(x=0, y=300)
+        boton5["command"] = self.graficarHistograma
+
+        boton6 = tk.Button(self.VentaLibre, text="graficar de Sectores", bg="blue", fg="white")
+        boton6.place(x=175, y=300)
+        boton6["command"] = self.graficarSectores
+
+        boton7 = tk.Button(self.VentaLibre, text="graficar de Violín", bg="blue", fg="white")
+        boton7.place(x=300, y=300)
+        boton7["command"] = self.graficarViolin
+
+
+#se definio este metodo para mostra los datos
+    def OctenerData(self):
+        x = []
+        y = []
+        with open(self.file, encoding='utf-8') as csvF:
+            plots = csv.reader(csvF, delimiter=',')
+            for row in plots:
+                x.append(row[0])
+                y.append(row[1])
+        retorno=""
+        for i in range(len(self.x)):
+            retorno+=x[i]+"  "+str(y[i])+"\n"
+        return  retorno
+
+#programacion de botones
+    def graficarCircular(self):
         plt.pie(self.y, labels=self.x)
         plt.show()
+    def graficarBarras(self):
+
         pass
+
+    def graficarBarrasHorizontal(self):
+
+        pass
+
+    def graficarAreas(self):
+
+        pass
+
+    def graficarHistograma(self):
+        pass
+
+    def graficarSectores(self):
+
+        pass
+
+    def graficarViolin(self):
+
+        pass
+
+
+
+
 
 def main():
     root=tk.Tk()
