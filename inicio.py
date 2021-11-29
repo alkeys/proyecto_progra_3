@@ -2,6 +2,8 @@ import  tkinter as tk
 from tkinter import ttk
 import  matplotlib.pyplot as plt
 import numpy as np
+import csv
+
 
 class Aplicacion:
     def __init__(self,master):
@@ -36,6 +38,8 @@ class Aplicacion:
         self.master.wait_window(segunVentana.ventanaSecundaria)
 
     def libre(self):
+        VentanaLibree = VentanaLibre(self.master)
+        self.master.wait_window(VentanaLibree.VentaLibre)
         pass
 
 class VentanaPrimerGrado:
@@ -81,7 +85,7 @@ class VentanaSegundoGrado:
     def __init__(self,master):
         self.master = master
         self.ventanaSecundaria=tk.Toplevel()
-        self.ventanaSecundaria.title("grafica lineal")
+        self.ventanaSecundaria.title("grafica de segundo grado")
         self.ventanaSecundaria.geometry('350x250')
         self.iniciar()
 
@@ -122,6 +126,33 @@ class VentanaSegundoGrado:
             x.append(i)
         plt.plot(x,y)
         plt.show()
+
+class VentanaLibre():
+    def __init__(self, master):
+        self.master = master
+        self.VentaLibre = tk.Toplevel()
+        self.VentaLibre.title("graficadora Libre")
+        self.VentaLibre.geometry('350x350')
+        self.iniciar()
+
+    def iniciar(self):
+        self.x = []
+        self.y = []
+        with open('datos.csv', encoding='utf-8') as csvF:
+            plots = csv.reader(csvF, delimiter=',')
+            next(plots)
+            for row in plots:
+                self.x.append(row[0])
+                self.y.append(int(row[1]))
+
+        enviar = tk.Button(self.VentaLibre, text="graficar", bg="blue", fg="white")
+        enviar.place(x=0, y=250)
+        enviar["command"] = self.graficar
+
+    def graficar(self):
+        plt.pie(self.y, labels=self.x)
+        plt.show()
+        pass
 
 def main():
     root=tk.Tk()
