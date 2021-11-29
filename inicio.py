@@ -145,7 +145,7 @@ class VentanaLibre():
                 self.x.append(row[0])
                 self.y.append(int(row[1]))
 
-        enviar = tk.Button(self.VentaLibre, text="graficar", bg="blue", fg="white")
+        enviar = tk.Button(self.VentaLibre, text="graficar circular", bg="blue", fg="white")
         enviar.place(x=0, y=250)
         enviar["command"] = self.graficar
 
