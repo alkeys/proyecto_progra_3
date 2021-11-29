@@ -208,7 +208,8 @@ class VentanaLibre():
     def graficarAreas(self):
 
         pass
-
+    #talvez no funcionen
+###############################################################
     def graficarHistograma(self):
         pass
 
@@ -219,7 +220,7 @@ class VentanaLibre():
     def graficarViolin(self):
 
         pass
-
+###############################################################
 
 
 
