@@ -6,6 +6,7 @@ import numpy as np
 import csv
 
 def main():
+
     #Definiendo los eventos de los botones
     def primerg():
         bg = Label(app2, bg="#cec09d")
@@ -149,9 +150,75 @@ def main():
             d3=int(tex3_d.get())
             y=[]
             x=[]
-            for i in range(-5,6):
+            for i in range(-50,51):
                 x.append(i)
                 y.append((a3*(pow(i,3)))+(b3*(pow(i,2)))+(i*c3)+d3)
+            plt.plot(x,y, 'g')
+            plt.show()
+
+    def cuartog():
+        bg = Label(app2, bg="#cec09d")
+        bg.place(relheight=1.0, relwidth=1.0)
+        bg3 = Label(app3, bg="#9fc5a0")
+        bg3.place(relheight=1.0, relwidth=1.0)
+        infoC = Label(app2, text=" ")
+        infoC = Label(app2, text="Ingrese los datos de la ecuación\nf(x) = aX\u00B4+bX\u00B3+cX\u00B2+dX+e", font=("BarQ", 15), bg="#cec09d", fg="#282828")
+        infoC.place(relx=0.5, relwidth=1.0, relheight=0.1, anchor="n")
+
+        info_a = Label(app2, text="Ingrese a:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
+        info_a.place(relx=0.1, y=100)
+        tex4_a = Entry(app2)
+        tex4_a.insert(0,"0")
+        tex4_a.place(relx=0.1, y=125)
+
+        info_b = Label(app2, text="Ingrese b:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
+        info_b.place(relx=0.1, y=175)
+        tex4_b = Entry(app2)
+        tex4_b.insert(0, "0")
+        tex4_b.place(relx=0.1, y=200)
+
+        info_c = Label(app2, text="Ingrese c:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
+        info_c.place(relx=0.1, y=250)
+        tex4_c = Entry(app2)
+        tex4_c.insert(0, "0")
+        tex4_c.place(relx=0.1, y=275)
+
+        info_d = Label(app2, text="Ingrese d:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
+        info_d.place(relx=0.1, y=325)
+        tex4_d = Entry(app2)
+        tex4_d.insert(0, "0")
+        tex4_d.place(relx=0.1, y=350)
+
+        info_e = Label(app2, text="Ingrese e:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
+        info_e.place(relx=0.1, y=400)
+        tex4_e = Entry(app2)
+        tex4_e.insert(0, "0")
+        tex4_e.place(relx=0.1, y=425)
+
+        desc_enviar3 = Label(app3, text="Presione el botón para ver la gráfica", font=("BarQ", 15), bg="#9fc5a0", fg="black")
+        desc_enviar3.place(relx=0.35, relwidth=0.8, height=50, anchor="n")
+        enviar3 = Button(app3, text="Graficar", command=lambda:[graficar_Cuarto()], font=("CaskaydiaCoveNerd", 12), bg="#9fc5a0", fg="#282828")
+        enviar3.place(relx=-0.05, rely=0.1, relwidth=0.8, height=50)
+
+        def graficar_Cuarto():
+            fig = plt.figure()
+            ax = fig.add_subplot(1, 1, 1)
+            ax.spines['left'].set_position('center')
+            ax.spines['bottom'].set_position('center')
+            ax.spines['right'].set_color('none')
+            ax.spines['top'].set_color('none')
+            ax.xaxis.set_ticks_position('bottom')
+            ax.yaxis.set_ticks_position('left')
+            a4=int(tex4_a.get())
+            b4=int(tex4_b.get())
+            c4=int(tex4_c.get())
+            d4=int(tex4_d.get())
+            e4=int(tex4_e.get())
+            y=[]
+            x=[]
+            for i in range(-5,6):
+                x.append(i)
+                y.append((a4*(pow(i,4)))+(b4*(pow(i,3)))+(c4*(pow(i,2)))+(i*d4)+e4)
             plt.plot(x,y, 'g')
             plt.show()
 
@@ -289,8 +356,11 @@ def main():
     boton2 = Button(app, text="Gráfica de Segundo Grado", command=lambda:[segundog()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
     boton2.place(relx=0.35, rely=0.18, relwidth=0.8, height=50)
 
-    boton3 = Button(app, text="Gráfica de Equación Cúbica", command=lambda:[cubic()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
+    boton3 = Button(app, text="Gráfica de Tercer Grado", command=lambda:[cubic()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
     boton3.place(relx=0.35, rely=0.27, relwidth=0.8, height=50)
+
+    boton4 = Button(app, text="Gráfica de Cuarto Grado", command=lambda:[(cuartog())], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
+    boton4.place(relx=0.35, rely=0.36, relwidth=0.8, height=50)
 
     botonFinal = Button(app, text="Gráfica Libre (mediante CSV)", command=lambda:[libreg()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
     botonFinal.place(relx=0.35, rely=0.72, relwidth=0.8, height=50)
