@@ -311,9 +311,10 @@ def main():
     root = Tk()
 
     HEIGHT=600
-    WIDTH=1000
+    WIDTH=1200
 
     root.title("GphicsCalc")
+    root.resizable(0,0)
     ico = Image.open("logo.png")
     photo = ImageTk.PhotoImage(ico)
     root.wm_iconphoto(False, photo)
