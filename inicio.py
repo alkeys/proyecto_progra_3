@@ -4,6 +4,7 @@ from tkinter.filedialog import askopenfilename
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import pyglet
 
 def main():
 
@@ -308,6 +309,11 @@ def main():
 
 
     #Inicio de la GUI del programa
+    pyglet.font.add_file("fonts/Barq.ttf")
+    pyglet.font.add_file("fonts/CaskaydiaCoveNerdFont.ttf")
+    pyglet.font.add_file("fonts/ChocolateCookies.ttf")
+    pyglet.font.add_file("fonts/Coolvetica.otf")
+
     root = Tk()
 
     HEIGHT=600
@@ -315,7 +321,7 @@ def main():
 
     root.title("GphicsCalc")
     root.resizable(0,0)
-    ico = Image.open("logo.png")
+    ico = Image.open("img/logo.png")
     photo = ImageTk.PhotoImage(ico)
     root.wm_iconphoto(False, photo)
 
@@ -331,7 +337,7 @@ def main():
     desc.place(relx=0.77, rely=0.6)
 
     #Logo
-    logo = Image.open("logo.png")
+    logo = Image.open("img/logo.png")
     #logo = ImageTk.PhotoImage(file="logo.png")
     resized = logo.resize((int(logo.size[0]/5),int(logo.size[1]/5)), Image.ANTIALIAS)
     new_logo = ImageTk.PhotoImage(resized)
