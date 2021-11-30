@@ -317,7 +317,7 @@ def main():
     root = Tk()
 
     HEIGHT=600
-    WIDTH=1200
+    WIDTH=1000
 
     root.title("GphicsCalc")
     root.resizable(0,0)
