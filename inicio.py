@@ -2,12 +2,11 @@ from tkinter import *
 from PIL import Image, ImageTk
 from tkinter.filedialog import askopenfilename
 import matplotlib.pyplot as plt
-import numpy as np
 import csv
-import pyglet
+import webbrowser
 
+#Inicio del Main
 def main():
-
     #Definiendo los eventos de los botones
     def primerg():
         bg = Label(app2, bg="#cec09d")
@@ -42,7 +41,11 @@ def main():
             for i in range(-100,101):
                 Vx.append((i))
                 Vy.append((x*i)+c)
+            plt.subplots(constrained_layout=True)
             plt.plot(Vx,Vy)
+            plt.ylabel("Datos en y")
+            plt.xlabel("Datos en x")
+            plt.title("Gráfica de Primer Grado")
             plt.show()
 
     def segundog():
@@ -96,6 +99,9 @@ def main():
                 y.append((a*(pow(i,2)))+(i*b)+c)
                 x.append(i)
             plt.plot(x,y, 'r')
+            plt.ylabel("Datos en y")
+            plt.xlabel("Datos en x")
+            plt.title("Gráfica de Segundo Grado")
             plt.show()
 
     def cubic():
@@ -155,72 +161,7 @@ def main():
                 x.append(i)
                 y.append((a3*(pow(i,3)))+(b3*(pow(i,2)))+(i*c3)+d3)
             plt.plot(x,y, 'g')
-            plt.show()
-
-    def cuartog():
-        bg = Label(app2, bg="#cec09d")
-        bg.place(relheight=1.0, relwidth=1.0)
-        bg3 = Label(app3, bg="#9fc5a0")
-        bg3.place(relheight=1.0, relwidth=1.0)
-        infoC = Label(app2, text=" ")
-        infoC = Label(app2, text="Ingrese los datos de la ecuación\nf(x) = aX\u00B4+bX\u00B3+cX\u00B2+dX+e", font=("BarQ", 15), bg="#cec09d", fg="#282828")
-        infoC.place(relx=0.5, relwidth=1.0, relheight=0.1, anchor="n")
-
-        info_a = Label(app2, text="Ingrese a:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
-        info_a.place(relx=0.1, y=100)
-        tex4_a = Entry(app2)
-        tex4_a.insert(0,"0")
-        tex4_a.place(relx=0.1, y=125)
-
-        info_b = Label(app2, text="Ingrese b:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
-        info_b.place(relx=0.1, y=175)
-        tex4_b = Entry(app2)
-        tex4_b.insert(0, "0")
-        tex4_b.place(relx=0.1, y=200)
-
-        info_c = Label(app2, text="Ingrese c:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
-        info_c.place(relx=0.1, y=250)
-        tex4_c = Entry(app2)
-        tex4_c.insert(0, "0")
-        tex4_c.place(relx=0.1, y=275)
-
-        info_d = Label(app2, text="Ingrese d:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
-        info_d.place(relx=0.1, y=325)
-        tex4_d = Entry(app2)
-        tex4_d.insert(0, "0")
-        tex4_d.place(relx=0.1, y=350)
-
-        info_e = Label(app2, text="Ingrese e:", font=("CaskaydiaCoveNerd", 12), bg="#cec09d", fg="#282828")
-        info_e.place(relx=0.1, y=400)
-        tex4_e = Entry(app2)
-        tex4_e.insert(0, "0")
-        tex4_e.place(relx=0.1, y=425)
-
-        desc_enviar3 = Label(app3, text="Presione el botón para ver la gráfica", font=("BarQ", 15), bg="#9fc5a0", fg="black")
-        desc_enviar3.place(relx=0.35, relwidth=0.8, height=50, anchor="n")
-        enviar3 = Button(app3, text="Graficar", command=lambda:[graficar_Cuarto()], font=("CaskaydiaCoveNerd", 12), bg="#9fc5a0", fg="#282828")
-        enviar3.place(relx=-0.05, rely=0.1, relwidth=0.8, height=50)
-
-        def graficar_Cuarto():
-            fig = plt.figure()
-            ax = fig.add_subplot(1, 1, 1)
-            ax.spines['left'].set_position('center')
-            ax.spines['bottom'].set_position('center')
-            ax.spines['right'].set_color('none')
-            ax.spines['top'].set_color('none')
-            ax.xaxis.set_ticks_position('bottom')
-            ax.yaxis.set_ticks_position('left')
-            a4=int(tex4_a.get())
-            b4=int(tex4_b.get())
-            c4=int(tex4_c.get())
-            d4=int(tex4_d.get())
-            e4=int(tex4_e.get())
-            y=[]
-            x=[]
-            for i in range(-5,6):
-                x.append(i)
-                y.append((a4*(pow(i,4)))+(b4*(pow(i,3)))+(c4*(pow(i,2)))+(i*d4)+e4)
-            plt.plot(x,y, 'g')
+            plt.title("Gráfica de Tercer Grado")
             plt.show()
 
     def libreg():
@@ -259,8 +200,9 @@ def main():
             return  retorno
 
         def graficarCircular():
+            plt.figure(figsize=(8,5))
             cake = plt.pie(y, autopct='%1.2f%%')
-            plt.legend(cake, labels=x, loc='center right')
+            plt.legend(cake, labels=x, loc='best')
             plt.axis('equal')
             plt.tight_layout()
             plt.show()
@@ -286,8 +228,6 @@ def main():
             plt.title("Gráfica de Barras Horizontales")
             plt.show()
 
-        dato1 = ObtenerData()
-
         frame1=Frame(app2, bg="#cec09d")
         frame1.place(rely=0.1, relwidth=1.0, relheight=1.0)
 
@@ -307,13 +247,25 @@ def main():
         barrasH = Button(app3, text="Gráfica de barras horizontales", command=lambda:[graficarBarrasHorizontal()], font=("CaskaydiaCoveNerd", 12), bg="#9fc5a0", fg="#282828")
         barrasH.place(relx=-0.05, rely=0.22, relwidth=0.8, height=30)
 
+    def acercaDe():
+        bg_acerca_de = Label(app2, bg="#cec09d")
+        bg_acerca_de.place(relheight=1.0, relwidth=1.0)
+        desc_acerca = Label(app2, text="Acerca de la aplicación", font=("BarQ", 15), bg="#cec09d", fg="black")
+        desc_acerca.place(relx=0.5, relwidth=1.0, relheight=0.1, anchor="n")
+        info_acerca = Label(app2, text="GphicsCalc es una aplicación creada\npor 3 entrenadores Pokemon que su camino\nninja es graduarse de Ingeniería en Sistemas", font=("BarQ", 13), bg="#cec09d", fg="black")
+        info_acerca.place(relx=0.5, rely=0.08, relwidth=1.0, relheight=0.15, anchor="n")
+        devels_text = "Arana Aguirre, Inmer Vladimir   -   \tAA20047\nAviles Moran, Ernesto Alexander   -   \tAM18007\nTejada Cruz, Moisés Ernesto   -   \tTC20006"
+        devels = Label(app2, text=devels_text, font=("BarQ", 13), bg="#cec09d", fg="black")
+        devels.place(relx=0.5, rely=0.24, relwidth=1.0, relheight=0.15, anchor="n")
+
+        url = "https://github.com/am18007ESD1352021/proyecto_progra_3"
+        def OpenUrl():
+            webbrowser.open_new(url)
+
+        buttonUrl = Button(app2, text="Ir a GitHub", command=lambda:[OpenUrl()], font=("BarQ", 12), bg="#cec09d", fg="#282828", bd="1")
+        buttonUrl.place(relx=0.5, rely=0.40, relwidth=0.8, height=50, anchor="n")
 
     #Inicio de la GUI del programa
-    pyglet.font.add_file("fonts/Barq.ttf")
-    pyglet.font.add_file("fonts/CaskaydiaCoveNerdFont.ttf")
-    pyglet.font.add_file("fonts/ChocolateCookies.ttf")
-    pyglet.font.add_file("fonts/Coolvetica.otf")
-
     root = Tk()
 
     HEIGHT=600
@@ -366,14 +318,14 @@ def main():
     boton3 = Button(app, text="Gráfica de Tercer Grado", command=lambda:[cubic()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
     boton3.place(relx=0.35, rely=0.27, relwidth=0.8, height=50)
 
-    boton4 = Button(app, text="Gráfica de Cuarto Grado", command=lambda:[(cuartog())], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
-    boton4.place(relx=0.35, rely=0.36, relwidth=0.8, height=50)
-
     botonFinal = Button(app, text="Gráfica Libre (mediante CSV)", command=lambda:[libreg()], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
-    botonFinal.place(relx=0.35, rely=0.72, relwidth=0.8, height=50)
+    botonFinal.place(relx=0.35, rely=0.36, relwidth=0.8, height=50)
 
-    #Espacio de la App 1
+    acerca = Button(app, text="Acerca de", command=lambda:[(acercaDe())], font=("BarQ"), bg="#ebdbb2", fg="#282828", bd="1")
+    acerca.place(relx=0.35, rely=0.45, relwidth=0.8, height=50)
+
     #---------Fin del mainloop---------#
     root.mainloop()
 
 main()
+#Fin del Main
